@@ -22,9 +22,9 @@ erDiagram
 title: CONCEPT <-> FEATURE, an m:n relationship
 ---
 erDiagram
-    CONCEPT }o..o{ FEATURE : has
     CONCEPT ||--o{ DEFINITION : has
     FEATURE ||--o{ DEFINITION : has
+    CONCEPT }o..o{ FEATURE : has
 ```
 
 ```mermaid
