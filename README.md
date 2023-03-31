@@ -19,12 +19,11 @@ erDiagram
 
 ```mermaid
 ---
-title: CONCEPT %3C--%3E FEATURE, an m:n relationship
+title: CONCEPT & FEATURE, an m:n relationship
 ---
 erDiagram
     DEFINITION }o--|| CONCEPT : has
     DEFINITION }o--|| FEATURE : has
-    CONCEPT    }o..o{ FEATURE : has
 ```
 
 ```mermaid
