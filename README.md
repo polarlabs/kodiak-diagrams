@@ -19,11 +19,21 @@ erDiagram
 
 ```mermaid
 ---
+title: CONCEPT <-> FEATURE, an m:n relationship
+---
+erDiagram
+    CONCEPT }o..o{ FEATURE : has
+    CONCEPT ||--o{ DEFINITION : has
+    FEATURE ||--o{ DEFINITION : has
+```
+
+```mermaid
+---
 title: NAMESPACE
 ---
 erDiagram
     NAMESPACE {
-        int    id   PK "NOT NULL"
+        int    id   PK "NOT NULL, AUTOINCREMENT"
         string uuid UK "NOT NULL"
         string name    "NOT NULL"
     }
@@ -31,4 +41,4 @@ erDiagram
 
 # Links
 
-(https://mermaid.js.org/syntax/entityRelationshipDiagram.html)[ER diagrams with Mermaid]
+[ER diagrams with Mermaid](https://mermaid.js.org/syntax/entityRelationshipDiagram.html)
