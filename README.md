@@ -6,25 +6,25 @@ kodiak's entity–relationship model
 title: kodiak 0.1.0
 ---
 erDiagram
-    NAMESPACE ||--o{ CONCEPT : contains
-    NAMESPACE ||--o{ FEATURE : contains
-    NAMESPACE ||--o{ ENTITY : contains
-    NAMESPACE ||--o{ DATA_IDENTIFIER : contains
+    NAMESPACE ||--o{ CONCEPT          : contains
+    NAMESPACE ||--o{ FEATURE          : contains
+    NAMESPACE ||--o{ ENTITY           : contains
+    NAMESPACE ||--o{ DATA_IDENTIFIER  : contains
     NAMESPACE ||--o{ DATA_REF_CONCEPT : contains
-    CONCEPT }o..o{ FEATURE : has
-    CONCEPT ||--o{ ENTITY : has
-    ENTITY ||--|{DATA_IDENTIFIER: has
-    ENTITY ||--o{DATA_REF_CONCEPT: has
+    CONCEPT   }o..o{ FEATURE          : has
+    CONCEPT   ||--o{ ENTITY           : has
+    ENTITY    ||--|{ DATA_IDENTIFIER  : has
+    ENTITY    ||--o{ DATA_REF_CONCEPT : has
 ```
 
 ```mermaid
 ---
-title: CONCEPT <-> FEATURE, an m:n relationship
+title: CONCEPT %3C--%3E FEATURE, an m:n relationship
 ---
 erDiagram
-    CONCEPT ||--o{ DEFINITION : has
-    FEATURE ||--o{ DEFINITION : has
-    CONCEPT }o..o{ FEATURE : has
+    DEFINITION }o--|| CONCEPT : has
+    DEFINITION }o--|| FEATURE : has
+    CONCEPT    }o..o{ FEATURE : has
 ```
 
 ```mermaid
