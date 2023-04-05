@@ -1,43 +1,17 @@
-# kodiak-er-model
-kodiak's entity–relationship model
+# Diagrams detailing Kodiak's project and system
 
-```mermaid
----
-title: kodiak 0.1.0
----
-erDiagram
-    NAMESPACE ||--o{ CONCEPT          : contains
-    NAMESPACE ||--o{ FEATURE          : contains
-    NAMESPACE ||--o{ ENTITY           : contains
-    NAMESPACE ||--o{ DATA_IDENTIFIER  : contains
-    NAMESPACE ||--o{ DATA_REF_CONCEPT : contains
-    CONCEPT   }o..o{ FEATURE          : has
-    CONCEPT   ||--o{ ENTITY           : has
-    ENTITY    ||--|{ DATA_IDENTIFIER  : has
-    ENTITY    ||--o{ DATA_REF_CONCEPT : has
-```
+A diagram is worth a thousand words. The following diagrams, powered by [mermaid](https://mermaid.js.org/)[^1], 
+guide the Kodiak project and its implementation.
 
-```mermaid
----
-title: CONCEPT & FEATURE, an m:n relationship
----
-erDiagram
-    DEFINITION }o--|| CONCEPT : has
-    DEFINITION }o--|| FEATURE : has
-```
+[Project's structure](PROJECT-STRUCTURE.md)
 
-```mermaid
----
-title: NAMESPACE
----
-erDiagram
-    NAMESPACE {
-        int    id   PK "NOT NULL, AUTOINCREMENT"
-        string uuid UK "NOT NULL"
-        string name    "NOT NULL"
-    }
-```
+[System architecture](SYSTEM-ARCHITECTURE.md)
 
-# Links
+[Entity–relationship model (ER model)](ENTITY-RELATIONSHIP-MODEL.md)
 
-[ER diagrams with Mermaid](https://mermaid.js.org/syntax/entityRelationshipDiagram.html)
+[Database schema](DATABASE-SCHEMA.md)
+
+
+---
+[^1]: By the way, for all of you who wonder how we create the diagrams have a look at [mermaid](https://mermaid.js.org/intro/).
+      Just embed the //mermaid// code as a code block in your markdown file. Github will render the diagrams for you.
