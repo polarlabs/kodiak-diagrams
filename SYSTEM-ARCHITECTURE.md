@@ -30,9 +30,12 @@ flowchart TB
   end
   web-client --> web-server.pro
   cli-client --> web-server.pro
+  web-server.pro --> file.server.pro
+  web-server.pro --> app.server.pro
   file-server --> filesystem[(filesystem)]
   web-server --> database[(database)]
   app-server --> database[(database)]
+  filesystem ~~~ database
 ```
 
 Target picture:
