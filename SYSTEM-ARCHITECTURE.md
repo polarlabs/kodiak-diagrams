@@ -16,19 +16,23 @@ flowchart TB
     direction RL
     cli-user((user)) --> cli-client[[cli-client]]
   end
-  subgraph server[ ]
+  subgraph file-server[ ]
     direction TB
-    file-server.api[[file-server]]
-    web-server.api[[web-server]] --o web-server.db-lib[db-lib]
-    app-server.api[[app-server]] --o app-server.db-lib[db-lib]
+    file-server.pro[[file-server]]
   end
-  web-client --> web-server.api
-  cli-client --> web-server.api
-  web-server.api --> file-server.api
-  web-server.api --> app-server.api
-  file-server.api --> filesystem[(filesystem)]
-  web-server.api --> database[(database)]
-  app-server.api --> database[(database)]
+  subgraph web-server[ ]
+    direction TB
+    web-server.pro[[web-server]] --o web-server.db-lib[db-lib]
+  end
+  subgraph app-server[ ]
+    direction TB
+    app-server.pro[[app-server]] --o app-server.db-lib[db-lib]
+  end
+  user-web --> web-server
+  user-cli --> web-server
+  file-server --> filesystem[(filesystem)]
+  web-server --> database[(database)]
+  app-server --> database[(database)]
 ```
 
 Target picture:
