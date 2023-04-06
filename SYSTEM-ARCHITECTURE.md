@@ -7,6 +7,18 @@ Kodiak's system architecture, still WIP.
 title: Kodiak's system architecture
 ---
 flowchart TB
+  file-server --> filesystem[(filesystem)]
+  web-server --> database[(database)]
+  app-server --> database[(database)]
+```
+
+Target picture:
+
+```mermaid
+---
+title: Kodiak's system architecture
+---
+flowchart TB
   direction LR
   subgraph user-web
     user((User)) --> web-client[[web-client]]
@@ -25,6 +37,4 @@ flowchart TB
   file-server --> file-system[(filesystem)]
   web-server --> database[(database)]
   app-server --> database[(database)]
-
-end
 ```
