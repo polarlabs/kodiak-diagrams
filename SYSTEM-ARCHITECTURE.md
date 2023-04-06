@@ -14,11 +14,11 @@ flowchart TB
   end
   subgraph web-server
     direction TB
-    web-server.pro[[web-server]] --o db-lib
+    web-server.pro[[web-server]] --o web-server.db-lib[db-lib]
   end
   subgraph app-server
     direction TB
-    app-server.pro[[app-server]] --o db-lib
+    app-server.pro[[app-server]] --o app-server.db-lib[db-lib]
   end
   file-server --> filesystem[(filesystem)]
   web-server --> database[(database)]
