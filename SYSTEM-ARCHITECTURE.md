@@ -7,20 +7,19 @@ Kodiak's system architecture, still WIP.
 title: Kodiak's system architecture
 ---
 flowchart TB
-  direction TB
   subgraph file-server
     direction TB
-    file-server.pro[[ ]]
+    file-server.pro[[file-server]]
   end
   subgraph web-server
     direction TB
-    web-server.pro[[ ]] --o web-server.db-lib[db-lib]
+    web-server.pro[[web-server]] --o web-server.db-lib[db-lib]
   end
   subgraph app-server
     direction TB
-    app-server.pro[[ ]] --o app-server.db-lib[db-lib]
+    app-server.pro[[app-server]] --o app-server.db-lib[db-lib]
   end
-  file-server ~~~ web-server
+  file-server.pro ~~~ web-server.pro
   file-server --> filesystem[(filesystem)]
   web-server --> database[(database)]
   app-server --> database[(database)]
