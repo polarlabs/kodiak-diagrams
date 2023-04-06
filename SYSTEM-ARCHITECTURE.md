@@ -9,7 +9,8 @@ title: Kodiak's system architecture
 flowchart TB
   direction TB
   subgraph web-server
-    web-server.pro[[web-server]] <--> db-lib
+    direction TB
+    web-server.pro[[web-server]] --o db-lib
   end
   file-server --> filesystem[(filesystem)]
   web-server --> database[(database)]
