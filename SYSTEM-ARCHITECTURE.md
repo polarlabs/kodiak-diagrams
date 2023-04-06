@@ -42,6 +42,6 @@ flowchart TB
   web-server.api ----> file-server.api
   file-server --> filesystem[(filesystem)]
   web-server --> database[(database)]
-  app-server ---> database[(database)]
-  database ~~~ fileystem
+  app-server ----> database[(database)]
+  database ~~~ filesystem
 ```
