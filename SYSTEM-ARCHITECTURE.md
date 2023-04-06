@@ -6,31 +6,27 @@ Kodiak's system architecture, still WIP.
 ---
 title: Kodiak's system architecture
 ---
-graph TB
+flowchart TB
   direction TB
-  subgraph user[]
-    subgraph user-web[ ]
-      direction LR
-      web-user((user)) --> web-client[[web-client]]
-    end
-    subgraph user-cli[ ]
-      direction RL
-      cli-user((user)) --> cli-client[[cli-client]]
-    end
+  subgraph user-web[ ]
+    direction LR
+    web-user((user)) --> web-client[[web-client]]
   end
-  subgraph server[]
-    subgraph file-server[ ]
-      direction TB
-      file-server.pro[[file-server]]
-    end
-    subgraph web-server[ ]
-      direction TB
-      web-server.pro[[web-server]] --o web-server.db-lib[db-lib]
-    end
-    subgraph app-server[ ]
-      direction TB
-      app-server.pro[[app-server]] --o app-server.db-lib[db-lib]
-    end
+  subgraph user-cli[ ]
+    direction RL
+    cli-user((user)) --> cli-client[[cli-client]]
+  end
+  subgraph file-server[ ]
+    direction TB
+    file-server.pro[[file-server]]
+  end
+  subgraph web-server[ ]
+    direction TB
+    web-server.pro[[web-server]] --o web-server.db-lib[db-lib]
+  end
+  subgraph app-server[ ]
+    direction TB
+    app-server.pro[[app-server]] --o app-server.db-lib[db-lib]
   end
   user-web --> web-server
   user-cli --> web-server
