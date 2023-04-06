@@ -7,12 +7,14 @@ Kodiak's system architecture, still WIP.
 title: Kodiak's system architecture
 ---
 flowchart TB
-  subgraph user-web[ ]  
+  subgraph user-web[ ]
+    direction TB  
     web-client[[web-client]] --o web-client.lib.common[lib.common]
     web-client --o web-client.lib.taxonomy[lib.taxonomy]
     web-client --o web-client.lib.validator[lib.validator]
   end
   subgraph user-cli[ ]
+    direction TB
     cli-client[[cli-client]] --o cli-client.lib.common[lib.common]
     cli-client --o cli-client.lib.validator[lib.validator]
   end
@@ -33,8 +35,8 @@ flowchart TB
     app-server.api[[app-server]] --o app-server.lib.db[lib.db]
   end
   web-user((user)) --> web-client
-  cli-user((user)) --> cli-client
   web-client ----> web-server.api
+  cli-user((user)) --> cli-client
   cli-client ----> web-server.api
   web-server.api ----> app-server.api
   web-server.api ----> file-server.api
