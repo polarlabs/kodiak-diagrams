@@ -28,6 +28,7 @@ flowchart TB
     direction TB
     app-server.pro[[app-server]] --o app-server.db-lib[db-lib]
   end
+  file-server ~~~ web-server
   web-client --> web-server.pro
   cli-client --> web-server.pro
   web-server.pro --> file-server.pro
@@ -35,6 +36,7 @@ flowchart TB
   file-server --> filesystem[(filesystem)]
   web-server --> database[(database)]
   app-server --> database[(database)]
+  filesystem ~~~ database
 ```
 
 Target picture:
