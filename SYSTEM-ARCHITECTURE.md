@@ -8,7 +8,7 @@ title: Kodiak's system architecture
 ---
 flowchart TB
   direction TB
-  subgraph file-server
+  subgraph file-server[ ]
     direction TB
     file-server.pro[[file-server]]
   end
