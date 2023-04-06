@@ -40,8 +40,7 @@ flowchart TB
   cli-client ----> web-server.api
   web-server.api ----> file-server.api
   web-server.api ----> app-server.api
-  file-server ----> filesystem[(filesystem)]
+  file-server --> filesystem[(filesystem)]
   web-server --> database[(database)]
   app-server --> database[(database)]
-  file-server ~~~ web-server
 ```
