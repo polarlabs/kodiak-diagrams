@@ -29,18 +29,18 @@ flowchart TB
     web-server.api[[web-server]] --o web-server.lib.common[lib.common]
     web-server.api[[web-server]] --o web-server.lib.db[lib.db]
     web-server.api[[web-server]] --o web-server.lib.taxonomy[lib.taxonomy]
-    web-server.api[[web-server]] --o web-server.lib.taxonomy[lib.validator]
+    web-server.api[[web-server]] --o web-server.lib.validator[lib.validator]
   end
   subgraph app-server[ ]
     direction TB
     app-server.api[[app-server]] --o app-server.lib.common[lib.common]
     app-server.api[[app-server]] --o app-server.lib.db[lib.db]
   end
-  web-client --> web-server.api
-  cli-client --> web-server.api
+  web-client ----> web-server.api
+  cli-client ----> web-server.api
   web-server.api --> file-server.api
   web-server.api --> app-server.api
-  file-server --> filesystem[(filesystem)]
+  file-server ----> filesystem[(filesystem)]
   web-server --> database[(database)]
   app-server --> database[(database)]
   filesystem ~~~ database
