@@ -8,13 +8,15 @@ title: Kodiak's system architecture
 ---
 graph TB
   direction TB
-  subgraph user-web[ ]
-    direction LR
-    web-user((user)) --> web-client[[web-client]]
-  end
-  subgraph user-cli[ ]
-    direction RL
-    cli-user((user)) --> cli-client[[cli-client]]
+  subgraph user[]
+    subgraph user-web[ ]
+      direction LR
+      web-user((user)) --> web-client[[web-client]]
+    end
+    subgraph user-cli[ ]
+      direction RL
+      cli-user((user)) --> cli-client[[cli-client]]
+    end
   end
   subgraph file-server[ ]
     direction TB
