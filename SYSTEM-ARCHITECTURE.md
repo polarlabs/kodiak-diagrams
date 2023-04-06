@@ -16,7 +16,7 @@ flowchart TB
     direction RL
     cli-user((user)) --> cli-client[[cli-client]]
   end
-  sugraph server[]
+  subgraph server[]
     subgraph file-server[ ]
       direction TB
       file-server.pro[[file-server]]
