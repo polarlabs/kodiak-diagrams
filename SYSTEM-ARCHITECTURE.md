@@ -7,7 +7,6 @@ Kodiak's system architecture, still WIP.
 title: Kodiak's system architecture
 ---
 flowchart TB
-  direction TB
   subgraph user-web[ ]
     direction LR
     web-user((user)) --> web-client[[web-client]]
