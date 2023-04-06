@@ -6,7 +6,7 @@ Kodiak's system architecture, still WIP.
 ---
 title: Kodiak's system architecture
 ---
-flowchart TB
+graph TB
   direction TB
   subgraph user-web[ ]
     direction LR
