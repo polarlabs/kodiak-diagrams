@@ -14,4 +14,4 @@ guide the Kodiak project and its implementation.
 
 ---
 [^1]: By the way, for all of you who wonder how we create the diagrams have a look at [mermaid](https://mermaid.js.org/intro/).
-      Just embed the //mermaid// code as a code block in your markdown file. Github will render the diagrams for you.
+      Simply embed the *mermaid* code as a code block in your markdown file. GitHub will render the diagrams for you.
