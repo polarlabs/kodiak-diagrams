@@ -15,7 +15,7 @@ erDiagram
     NAMESPACE_LOG {
         int    id           PK "NOT NULL, AUTOINCREMENT"
         int    namespace_id FK "NOT NULL"
-        int    entity_id    FK "NOT NULL"
+        int    entity_id    FK "NOT NULL | links to entities of Concept User"
         int    action_id    FK "NOT NULL"
         string timestamp       "NOT NULL"
         string prev
@@ -24,16 +24,17 @@ erDiagram
     }
     ACTION {
         int    id           PK "NOT NULL, AUTOINCREMENT"
-        string name            "NOT NULL"
+        string name            "NOT NULL | one of created, changed, archived, deleted, restored"
     }
     ENTITY {
-        int id           PK "NOT NULL, AUTOINCREMENT"
-        int namespace_id FK "NOT NULL"
-        int concept_id   FK "NOT NULL"
+        int    id           PK "NOT NULL, AUTOINCREMENT"
+        int    namespace_id FK "NOT NULL"
+        int    concept_id   FK "NOT NULL"
+        string uuid         UK "NOT NULL"
     }
     NAMESPACE ||--o{ NAMESPACE_LOG               : has
-    ACTION    ||--o{ NAMESPACE_LOG               : has
-    ENTITY    ||--o{ NAMESPACE_LOG               : carried out
+    ACTION    ||--o{ NAMESPACE_LOG               : describes
+    ENTITY    ||--o{ NAMESPACE_LOG               : "carries out"
 ```
 
 # Links
