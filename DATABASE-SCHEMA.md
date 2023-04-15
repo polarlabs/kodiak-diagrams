@@ -13,21 +13,27 @@ erDiagram
         string name    "NOT NULL"
     }
     NAMESPACE_LOG {
-        int       id           PK "NOT NULL, AUTOINCREMENT"
-        int       namespace_id FK "NOT NULL"
-        int       user_id      FK "NOT NULL"
-        int       action_id    FK "NOT NULL"
-        string    timestamp       "NOT NULL"
-        string    pre
-        string    post
-        string    note 
+        int    id           PK "NOT NULL, AUTOINCREMENT"
+        int    namespace_id FK "NOT NULL"
+        int    entity_id    FK "NOT NULL"
+        int    action_id    FK "NOT NULL"
+        string timestamp       "NOT NULL"
+        string prev
+        string post
+        string note 
     }
     ACTION {
-        int       id           PK "NOT NULL, AUTOINCREMENT"
-        string    name            "NOT NULL"
+        int    id           PK "NOT NULL, AUTOINCREMENT"
+        string name            "NOT NULL"
+    }
+    ENTITY {
+        int id           PK "NOT NULL, AUTOINCREMENT"
+        int namespace_id FK "NOT NULL"
+        int concept_id   FK "NOT NULL"
     }
     NAMESPACE ||--o{ NAMESPACE_LOG               : has
     ACTION    ||--o{ NAMESPACE_LOG               : has
+    ENTITY    ||--o{ NAMESPACE_LOG               : carried out
 ```
 
 # Links
