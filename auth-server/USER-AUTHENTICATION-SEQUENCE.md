@@ -11,15 +11,15 @@ sequenceDiagram
     U ->> S: POST Username and API token
     critical connects to database
         S ->>  D: connect
-        alt succeeds
+        alt connected
            S ->>  D: match username + API token
-        else fails
-           S ->>  D: log error
+        else failed
+           S ->>  S: log error
         end
     end
-    alt succeeds
+    alt matched
         S ->> U: JWT
-    else fails
+    else failed
         S ->> U: HTTP ERROR
     end
 ```
