@@ -42,11 +42,11 @@ flowchart TB
     app-server.api               --o app-server.lib.config[lib.config]
     app-server.api               --o app-server.lib.db[lib.db]
   end
-  web-user((user)) -->     web-client
-  web-client       ---->   auth-server.api
-  web-client       ------> web-server.api
-  cli-user((user)) -->     cli-client
-  cli-client       ---->   auth-server.api
+  web-user((user)) -->          web-client
+  web-client       <-- JWT -->  auth-server.api
+  web-client       ------>      web-server.api
+  cli-user((user)) -->          cli-client
+  cli-client       <-- JWT -->  auth-server.api
   cli-client       ------> web-server.api
   web-server.api   ------> app-server.api
   web-server.api   ------> file-server.api
