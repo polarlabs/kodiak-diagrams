@@ -18,6 +18,12 @@ flowchart TB
     cli-client[[cli-client]] --o cli-client.lib.common[lib.common]
     cli-client               --o cli-client.lib.validator[lib.validator]
   end
+  subgraph auth-server[ ]
+    direction TB
+    auth-server.api[[auth-server]] --o auth-server.lib.common[lib.common]
+    auth-server.api                --o auth-server.lib.db[lib.db]
+    auth-server.api                --o auth-server.lib.config[lib.config]
+  end
   subgraph file-server[ ]
     direction TB
     file-server.api[[file-server]] --o file-server.lib.config[lib.config]
