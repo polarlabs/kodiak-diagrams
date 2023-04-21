@@ -20,8 +20,8 @@ flowchart TB
   end
   subgraph auth-server[ ]
     direction TB
-    auth-server.api[[auth-server]] --o auth-server.lib.common[lib.common]
-    auth-server.api                --o auth-server.lib.db[lib.db]
+    auth-server.api[[auth-server]] --o auth-server.lib.db[lib.db]
+    auth-server.api                --o auth-server.lib.common[lib.common]
     auth-server.api                --o auth-server.lib.config[lib.config]
   end
   subgraph file-server[ ]
@@ -30,17 +30,17 @@ flowchart TB
   end
   subgraph web-server[ ]
     direction TB
-    web-server.api[[web-server]] --o web-server.lib.common[lib.common]
+    web-server.api[[web-server]] --o web-server.lib.db[lib.db]
+    web-server.api               --o web-server.lib.common[lib.common]
     web-server.api               --o web-server.lib.config[lib.config]
-    web-server.api               --o web-server.lib.db[lib.db]
     web-server.api               --o web-server.lib.taxonomy[lib.taxonomy]
     web-server.api               --o web-server.lib.validator[lib.validator]
   end
   subgraph app-server[ ]
     direction TB
-    app-server.api[[app-server]] --o app-server.lib.common[lib.common]
+    app-server.api[[app-server]] --o app-server.lib.db[lib.db]
+    app-server.api               --o app-server.lib.common[lib.common]
     app-server.api               --o app-server.lib.config[lib.config]
-    app-server.api               --o app-server.lib.db[lib.db]
   end
   web-user((user)) -->           web-client
   web-client       <-- JWT --->  auth-server.api
