@@ -15,7 +15,7 @@ Conventions:
 
 ```mermaid
 ---
-title: NAMESPACE, NAMESPACE_LOG, ACTION and ENTITY
+title: NAMESPACE, CONCEPT, FEATURE, DATATYPE and ENTITY
 ---
 erDiagram
     NAMESPACE {
@@ -46,6 +46,32 @@ erDiagram
         int    id PK "NOT NULL, AUTOINCREMENT"
         string n  UK "NOT NULL | one of Identity, Concept Reference, Cron Expression"
     }
+    ENTITY {
+        int    id           PK "NOT NULL, AUTOINCREMENT"
+        string uuid         UK "NOT NULL"
+        int    concept_id   FK "NOT NULL"
+        int    namespace_id FK "NOT NULL"
+    }
+    NAMESPACE ||--o{ CONCEPT         : contains
+    NAMESPACE ||--o{ FEATURE         : contains
+    NAMESPACE ||--o{ CONCEPT_FEATURE : contains
+    NAMESPACE ||--o{ ENTITY          : contains
+    CONCEPT   ||..o{ CONCEPT_FEATURE : has
+    CONCEPT   ||--o{ ENTITY          : has
+    FEATURE   ||..o{ CONCEPT_FEATURE : has
+    FEATURE   }o--|| DATATYPE        : has    
+```
+
+```mermaid
+---
+title: NAMESPACE, NAMESPACE_LOG, ENTITY and ACTION
+---
+erDiagram
+    NAMESPACE {
+        int    id   PK "NOT NULL, AUTOINCREMENT"
+        string uuid UK "NOT NULL"
+        string n       "NOT NULL"
+    }
     NAMESPACE_LOG {
         int      id           PK "NOT NULL, AUTOINCREMENT"
         int      action_id    FK "NOT NULL"
@@ -56,25 +82,19 @@ erDiagram
         string   post
         string   note 
     }
-    ACTION {
-        int    id PK "NOT NULL, AUTOINCREMENT"
-        string n  UK "NOT NULL | one of created, changed, archived, deleted, restored"
-    }
     ENTITY {
         int    id           PK "NOT NULL, AUTOINCREMENT"
         string uuid         UK "NOT NULL"
         int    concept_id   FK "NOT NULL"
         int    namespace_id FK "NOT NULL"
     }
-    NAMESPACE ||--o{ NAMESPACE_LOG : has
-    NAMESPACE ||--o{ CONCEPT       : contains
-    NAMESPACE ||--o{ FEATURE       : contains
-    NAMESPACE ||--o{ ENTITY        : contains
-    CONCEPT   }o..o{ FEATURE       : has
-    CONCEPT   ||--o{ ENTITY        : has
-    FEATURE   }o--|| DATATYPE      : has
-    ACTION    ||--o{ NAMESPACE_LOG : describes
-    ENTITY    ||--o{ NAMESPACE_LOG : "carries out"
+    ACTION {
+        int    id PK "NOT NULL, AUTOINCREMENT"
+        string n  UK "NOT NULL | one of created, changed, archived, deleted, restored"
+    }
+    NAMESPACE     ||--o{ NAMESPACE_LOG : has
+    NAMESPACE_LOG }o--|| ENTITY        : "carried out by"
+    NAMESPACE_LOG }o--|| ACTION        : "triggered by"
 ```
 
 ```mermaid
