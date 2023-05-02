@@ -49,17 +49,49 @@ erDiagram
     ENTITY {
         int    id           PK "NOT NULL, AUTOINCREMENT"
         string uuid         UK "NOT NULL"
-        int    concept_id   FK "NOT NULL"
         int    namespace_id FK "NOT NULL"
+        int    concept_id   FK "NOT NULL"
     }
-    NAMESPACE ||--o{ CONCEPT         : contains
-    NAMESPACE ||--o{ FEATURE         : contains
-    NAMESPACE ||--o{ CONCEPT_FEATURE : contains
-    NAMESPACE ||--o{ ENTITY          : contains
-    CONCEPT   ||..o{ CONCEPT_FEATURE : has
-    CONCEPT   ||--o{ ENTITY          : has
-    FEATURE   ||..o{ CONCEPT_FEATURE : has
-    FEATURE   }o--|| DATATYPE        : has    
+    ENTITY_FEATURE {
+        string label
+        int    namespace_id FK     "NOT NULL"
+        int    entity_id    PK, FK "NOT NULL"
+        int    feature_id   PK, FK "NOT NULL"
+    }
+    DATA_IDENTITY {
+        int    id           PK "NOT NULL, AUTOINCREMENT"
+        string i               "NOT NULL"
+        int    namespace_id FK "NOT NULL"
+        int    entity_id    FK "NOT NULL | FK(entity_id, feature_id) -> ENTITY_FEATURE"
+        int    feature_id   FK "NOT NULL"
+    }
+    DATA_CONCEPT_REFERENCE {
+        int    id           PK "NOT NULL, AUTOINCREMENT"
+        string reference       "NOT NULL"
+        int    namespace_id FK "NOT NULL"
+        int    entity_id    FK "NOT NULL | FK(entity_id, feature_id) -> ENTITY_FEATURE"
+        int    feature_id   FK "NOT NULL"
+    }
+    DATA_CRON_EXPRESSION {
+        int    id              PK "NOT NULL, AUTOINCREMENT"
+        string cron_expression    "NOT NULL"
+        int    namespace_id    FK "NOT NULL"
+        int    entity_id       FK "NOT NULL | FK(entity_id, feature_id) -> ENTITY_FEATURE"
+        int    feature_id      FK "NOT NULL"
+    }
+    NAMESPACE      ||--o{ CONCEPT                : contains
+    NAMESPACE      ||--o{ FEATURE                : contains
+    NAMESPACE      ||--o{ CONCEPT_FEATURE        : contains
+    NAMESPACE      ||--o{ ENTITY                 : contains
+    CONCEPT        ||..o{ CONCEPT_FEATURE        : has
+    FEATURE        ||..o{ CONCEPT_FEATURE        : has
+    FEATURE        }o--|| DATATYPE               : has
+    CONCEPT        ||--o{ ENTITY                 : has
+    ENTITY         ||..o{ ENTITY_FEATURE         : has
+    FEATURE        ||..o{ ENTITY_FEATURE         : has
+    ENTITY_FEATURE ||--o{ DATA_IDENTITY          : provides
+    ENTITY_FEATURE ||--o{ DATA_CONCEPT_REFERENCE : provides
+    ENTITY_FEATURE ||--o{ DATA_CRON_EXPRESSION   : provides
 ```
 
 ```mermaid
@@ -85,8 +117,8 @@ erDiagram
     ENTITY {
         int    id           PK "NOT NULL, AUTOINCREMENT"
         string uuid         UK "NOT NULL"
-        int    concept_id   FK "NOT NULL"
         int    namespace_id FK "NOT NULL"
+        int    concept_id   FK "NOT NULL"
     }
     ACTION {
         int    id PK "NOT NULL, AUTOINCREMENT"
