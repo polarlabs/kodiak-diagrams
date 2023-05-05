@@ -99,7 +99,7 @@ erDiagram
     ENTITY_FEATURE ||--o{ DATA_IDENTITY          : provides
     ENTITY_FEATURE ||--o{ DATA_CONCEPT_REFERENCE : provides
     ENTITY_FEATURE ||--o{ DATA_CRON_EXPRESSION   : provides
-    ENTITY_FEATURE ||--o{ DATA_TASK_SEQUENCE     : provides
+    ENTITY_FEATURE ||--o{ DATA_TASK              : provides
 ```
 
 ```mermaid
