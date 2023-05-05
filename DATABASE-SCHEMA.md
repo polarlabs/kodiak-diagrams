@@ -61,20 +61,27 @@ erDiagram
     DATA_IDENTITY {
         int    id           PK "NOT NULL, AUTOINCREMENT"
         string i               "NOT NULL"
-        int    namespace_id FK "NOT NULL"
+        int    namespace_id FK "NOT NULL | UK(namespace_id, entity_id, feature_id)  
         int    entity_id    FK "NOT NULL | FK(entity_id, feature_id) -> ENTITY_FEATURE"
         int    feature_id   FK "NOT NULL"
     }
     DATA_CONCEPT_REFERENCE {
         int    id           PK "NOT NULL, AUTOINCREMENT"
         string reference       "NOT NULL"
-        int    namespace_id FK "NOT NULL"
+        int    namespace_id FK "NOT NULL | UK(namespace_id, entity_id, feature_id)
         int    entity_id    FK "NOT NULL | FK(entity_id, feature_id) -> ENTITY_FEATURE"
         int    feature_id   FK "NOT NULL"
     }
     DATA_CRON_EXPRESSION {
         int    id              PK "NOT NULL, AUTOINCREMENT"
         string cron_expression    "NOT NULL"
+        int    namespace_id    FK "NOT NULL | UK(namespace_id, entity_id, feature_id)
+        int    entity_id       FK "NOT NULL | FK(entity_id, feature_id) -> ENTITY_FEATURE"
+        int    feature_id      FK "NOT NULL"
+    }
+    DATA_TASK {
+        int    id              PK "NOT NULL, AUTOINCREMENT"
+        string n                  "NOT NULL"
         int    namespace_id    FK "NOT NULL"
         int    entity_id       FK "NOT NULL | FK(entity_id, feature_id) -> ENTITY_FEATURE"
         int    feature_id      FK "NOT NULL"
@@ -92,6 +99,7 @@ erDiagram
     ENTITY_FEATURE ||--o{ DATA_IDENTITY          : provides
     ENTITY_FEATURE ||--o{ DATA_CONCEPT_REFERENCE : provides
     ENTITY_FEATURE ||--o{ DATA_CRON_EXPRESSION   : provides
+    ENTITY_FEATURE ||--o{ DATA_TASK_SEQUENCE     : provides
 ```
 
 ```mermaid
