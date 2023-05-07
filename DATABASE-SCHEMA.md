@@ -38,7 +38,7 @@ erDiagram
     }
     CONCEPT_FEATURE {
         string label
-        int    namespace_id FK     "NOT NULL"
+        int    namespace_id PK, FK "NOT NULL"
         int    concept_id   PK, FK "NOT NULL"
         int    feature_id   PK, FK "NOT NULL"
     }
@@ -54,28 +54,28 @@ erDiagram
     }
     ENTITY_FEATURE {
         string label
-        int    namespace_id FK     "NOT NULL"
+        int    namespace_id PK, FK "NOT NULL"
         int    entity_id    PK, FK "NOT NULL"
         int    feature_id   PK, FK "NOT NULL"
     }
     DATA_IDENTITY {
         int    id           PK "NOT NULL, AUTOINCREMENT"
         string i               "NOT NULL"
-        int    namespace_id FK "NOT NULL | UK(namespace_id, entity_id, feature_id)" 
+        int    namespace_id FK "NOT NULL" 
         int    entity_id    FK "NOT NULL | FK(entity_id, feature_id) -> ENTITY_FEATURE"
         int    feature_id   FK "NOT NULL"
     }
     DATA_CONCEPT_REFERENCE {
         int    id           PK "NOT NULL, AUTOINCREMENT"
         string reference       "NOT NULL"
-        int    namespace_id FK "NOT NULL | UK(namespace_id, entity_id, feature_id)"
+        int    namespace_id FK "NOT NULL"
         int    entity_id    FK "NOT NULL | FK(entity_id, feature_id) -> ENTITY_FEATURE"
         int    feature_id   FK "NOT NULL"
     }
     DATA_CRON_EXPRESSION {
         int    id              PK "NOT NULL, AUTOINCREMENT"
         string cron_expression    "NOT NULL"
-        int    namespace_id    FK "NOT NULL | UK(namespace_id, entity_id, feature_id)"
+        int    namespace_id    FK "NOT NULL"
         int    entity_id       FK "NOT NULL | FK(entity_id, feature_id) -> ENTITY_FEATURE"
         int    feature_id      FK "NOT NULL"
     }
@@ -86,20 +86,35 @@ erDiagram
         int    entity_id       FK "NOT NULL | FK(entity_id, feature_id) -> ENTITY_FEATURE"
         int    feature_id      FK "NOT NULL"
     }
-    NAMESPACE      ||--o{ CONCEPT                : contains
-    NAMESPACE      ||--o{ FEATURE                : contains
-    NAMESPACE      ||--o{ CONCEPT_FEATURE        : contains
-    NAMESPACE      ||--o{ ENTITY                 : contains
-    CONCEPT        ||..o{ CONCEPT_FEATURE        : has
-    FEATURE        ||..o{ CONCEPT_FEATURE        : has
-    FEATURE        }o--|| DATATYPE               : has
-    CONCEPT        ||--o{ ENTITY                 : has
-    ENTITY         ||..o{ ENTITY_FEATURE         : has
-    FEATURE        ||..o{ ENTITY_FEATURE         : has
-    ENTITY_FEATURE ||--o{ DATA_IDENTITY          : provides
-    ENTITY_FEATURE ||--o{ DATA_CONCEPT_REFERENCE : provides
-    ENTITY_FEATURE ||--o{ DATA_CRON_EXPRESSION   : provides
-    ENTITY_FEATURE ||--o{ DATA_TASK              : provides
+    DATA_SEQUENCE {
+        int    id              PK "NOT NULL, AUTOINCREMENT"
+        int    namespace_id    FK "NOT NULL"
+        int    entity_id       FK "NOT NULL | FK(entity_id, feature_id) -> ENTITY_FEATURE"
+        int    feature_id      FK "NOT NULL"
+        int    datatype_id     FK "NOT NULL"
+    }
+    DATA_SEQUENCE_DATA_TASK {
+        int    namespace_id     PK, FK "NOT NULL"
+        int    data_sequence_id PK, FK "NOT NULL"
+        int    data_task_id     PK, FK "NOT NULL"
+    }
+    NAMESPACE      ||--o{ CONCEPT                 : contains
+    NAMESPACE      ||--o{ FEATURE                 : contains
+    NAMESPACE      ||--o{ CONCEPT_FEATURE         : contains
+    NAMESPACE      ||--o{ ENTITY                  : contains
+    CONCEPT        ||..o{ CONCEPT_FEATURE         : has
+    FEATURE        ||..o{ CONCEPT_FEATURE         : has
+    FEATURE        }o--|| DATATYPE                : has
+    CONCEPT        ||--o{ ENTITY                  : has
+    ENTITY         ||..o{ ENTITY_FEATURE          : has
+    FEATURE        ||..o{ ENTITY_FEATURE          : has
+    ENTITY_FEATURE ||--o{ DATA_IDENTITY           : provides
+    ENTITY_FEATURE ||--o{ DATA_CONCEPT_REFERENCE  : provides
+    ENTITY_FEATURE ||--o{ DATA_CRON_EXPRESSION    : provides
+    ENTITY_FEATURE ||--o{ DATA_TASK               : provides
+    ENTITY_FEATURE ||--o{ DATA_SEQUENCE           : provides
+    DATA_SEQUENCE  ||--o{ DATA_SEQUENCE_DATA_TASK : provides
+    DATA_TASK      ||--o{ DATA_SEQUENCE_DATA_TASK : provides
 ```
 
 ```mermaid
