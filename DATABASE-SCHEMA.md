@@ -93,28 +93,37 @@ erDiagram
         int    feature_id      FK "NOT NULL"
         int    datatype_id     FK "NOT NULL"
     }
+    DATA_SEQUENCE_DATA_CONCEPT_REFERENCE {
+        int    namespace_id              PK, FK "NOT NULL"
+        int    data_sequence_id          PK, FK "NOT NULL"
+        int    data_concept_reference_id PK, FK "NOT NULL"
+        string pos                              "NOT NULL"
+    }
     DATA_SEQUENCE_DATA_TASK {
         int    namespace_id     PK, FK "NOT NULL"
         int    data_sequence_id PK, FK "NOT NULL"
         int    data_task_id     PK, FK "NOT NULL"
+        string pos                     "NOT NULL"
     }
-    NAMESPACE      ||--o{ CONCEPT                 : contains
-    NAMESPACE      ||--o{ FEATURE                 : contains
-    NAMESPACE      ||--o{ CONCEPT_FEATURE         : contains
-    NAMESPACE      ||--o{ ENTITY                  : contains
-    CONCEPT        ||..o{ CONCEPT_FEATURE         : has
-    FEATURE        ||..o{ CONCEPT_FEATURE         : has
-    FEATURE        }o--|| DATATYPE                : has
-    CONCEPT        ||--o{ ENTITY                  : has
-    ENTITY         ||..o{ ENTITY_FEATURE          : has
-    FEATURE        ||..o{ ENTITY_FEATURE          : has
-    ENTITY_FEATURE ||--o{ DATA_IDENTITY           : provides
-    ENTITY_FEATURE ||--o{ DATA_CONCEPT_REFERENCE  : provides
-    ENTITY_FEATURE ||--o{ DATA_CRON_EXPRESSION    : provides
-    ENTITY_FEATURE ||--o{ DATA_TASK               : provides
-    ENTITY_FEATURE ||--o{ DATA_SEQUENCE           : provides
-    DATA_SEQUENCE  ||--o{ DATA_SEQUENCE_DATA_TASK : provides
-    DATA_TASK      ||--o{ DATA_SEQUENCE_DATA_TASK : provides
+    NAMESPACE              ||--o{ CONCEPT                              : contains
+    NAMESPACE              ||--o{ FEATURE                              : contains
+    NAMESPACE              ||--o{ CONCEPT_FEATURE                      : contains
+    NAMESPACE              ||--o{ ENTITY                               : contains
+    CONCEPT                ||..o{ CONCEPT_FEATURE                      : has
+    FEATURE                ||..o{ CONCEPT_FEATURE                      : has
+    FEATURE                }o--|| DATATYPE                             : has
+    CONCEPT                ||--o{ ENTITY                               : has
+    ENTITY                 ||..o{ ENTITY_FEATURE                       : has
+    FEATURE                ||..o{ ENTITY_FEATURE                       : has
+    ENTITY_FEATURE         ||--o{ DATA_IDENTITY                        : provides
+    ENTITY_FEATURE         ||--o{ DATA_CONCEPT_REFERENCE               : provides
+    ENTITY_FEATURE         ||--o{ DATA_CRON_EXPRESSION                 : provides
+    ENTITY_FEATURE         ||--o{ DATA_TASK                            : provides
+    ENTITY_FEATURE         ||--o{ DATA_SEQUENCE                        : provides
+    DATA_SEQUENCE          ||--o{ DATA_SEQUENCE_DATA_CONCEPT_REFERENCE : provides
+    DATA_CONCEPT_REFERENCE ||--o{ DATA_SEQUENCE_DATA_CONCEPT_REFERENCE : provides
+    DATA_SEQUENCE          ||--o{ DATA_SEQUENCE_DATA_TASK              : provides
+    DATA_TASK              ||--o{ DATA_SEQUENCE_DATA_TASK              : provides
 ```
 
 ```mermaid
